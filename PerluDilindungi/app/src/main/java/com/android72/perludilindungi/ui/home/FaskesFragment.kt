@@ -8,13 +8,12 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.android72.perludilindungi.R
-import com.android72.perludilindungi.databinding.FragmentHomeBinding
+import com.android72.perludilindungi.databinding.FragmentFaskesBinding
 
-class HomeFragment : Fragment() {
+class FaskesFragment : Fragment() {
 
-    private lateinit var homeViewModel: HomeViewModel
-    private var _binding: FragmentHomeBinding? = null
+    private lateinit var faskesViewModel: FaskesViewModel
+    private var _binding: FragmentFaskesBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -25,14 +24,14 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
+        faskesViewModel =
+            ViewModelProvider(this).get(FaskesViewModel::class.java)
 
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        _binding = FragmentFaskesBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner, Observer {
+        faskesViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
         return root

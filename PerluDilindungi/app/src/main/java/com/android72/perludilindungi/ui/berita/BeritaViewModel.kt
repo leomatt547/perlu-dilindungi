@@ -1,13 +1,13 @@
-package com.android72.perludilindungi.ui.dashboard
+package com.android72.perludilindungi.ui.berita
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class DashboardViewModel : ViewModel() {
+class BeritaViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is dashboard Fragment"
+        value = "This is berita Fragment"
     }
     val text: LiveData<String> = _text
 }
