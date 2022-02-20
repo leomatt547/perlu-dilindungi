@@ -1,4 +1,4 @@
-package com.android72.perludilindungi.ui.notifications
+package com.android72.perludilindungi.ui.bookmark
 
 import android.os.Bundle
 import android.view.LayoutInflater

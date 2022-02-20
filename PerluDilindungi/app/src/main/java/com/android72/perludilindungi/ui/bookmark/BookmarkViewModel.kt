@@ -1,4 +1,4 @@
-package com.android72.perludilindungi.ui.notifications
+package com.android72.perludilindungi.ui.bookmark
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

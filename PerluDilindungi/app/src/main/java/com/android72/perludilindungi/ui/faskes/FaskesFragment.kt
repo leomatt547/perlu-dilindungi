@@ -1,4 +1,4 @@
-package com.android72.perludilindungi.ui.home
+package com.android72.perludilindungi.ui.faskes
 
 import android.os.Bundle
 import android.view.LayoutInflater

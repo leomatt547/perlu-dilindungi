@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_faskes"
-        android:name="com.android72.perludilindungi.ui.home.FaskesFragment"
+        android:name="com.android72.perludilindungi.ui.faskes.FaskesFragment"
         android:label="@string/title_faskes"
         tools:layout="@layout/fragment_faskes" />
 
@@ -16,10 +16,9 @@
         android:name="com.android72.perludilindungi.ui.berita.BeritaFragment"
         android:label="@string/title_berita"
         tools:layout="@layout/fragment_berita" />
-
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.android72.perludilindungi.ui.notifications.BookmarkFragment"
+        android:id="@+id/navigation_bookmark"
+        android:name="com.android72.perludilindungi.ui.bookmark.BookmarkFragment"
         android:label="@string/title_bookmark"
         tools:layout="@layout/fragment_bookmark" />
 </navigation>
