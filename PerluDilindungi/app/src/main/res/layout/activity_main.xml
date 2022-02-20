@@ -26,8 +26,8 @@
         android:layout_marginBottom="16dp"
         android:contentDescription="@string/qr_code_scanner"
         android:src="@drawable/ic_qr_white"
-        app:navGraph="@navigation/mobile_navigation"
-        app:defaultNavHost="true"/>
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/mobile_navigation" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
@@ -61,6 +61,5 @@
             android:text="@string/title_bookmark" />
 
     </com.google.android.material.tabs.TabLayout>
-
 
 </RelativeLayout>
