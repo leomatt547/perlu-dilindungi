@@ -6,6 +6,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.android72.perludilindungi.databinding.ActivityMainBinding
+import com.android72.perludilindungi.ui.checkin.CheckinActivity
 import com.google.android.material.tabs.TabLayout
 
 

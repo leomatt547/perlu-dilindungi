@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CheckinActivity">
+    tools:context=".ui.checkin.CheckinActivity">
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/qr_button_back"
@@ -52,42 +52,57 @@
         app:layout_constraintTop_toBottomOf="@id/qr_temperature"
         app:layout_constraintBottom_toTopOf="@id/frame_layout_camera"/>
 
-    <FrameLayout
-        android:id="@+id/frame_layout_camera"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/qr_scan"
-        app:layout_constraintBottom_toTopOf="@id/qr_result"/>
-    <!--        android:visibility="gone"-->
+
     <TextView
         android:id="@+id/qr_result"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:gravity="center"
-        android:text="Hasilnya"
-        android:textAlignment="center"
+        android:layout_marginStart="15dp"
+        android:gravity="start"
+        android:text="Loading..."
+        android:textAlignment="textStart"
         android:textColor="@color/black"
         android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@id/qr_icon_status"
+        app:layout_constraintTop_toTopOf="@id/qr_icon_status"
         app:layout_constraintTop_toBottomOf="@id/frame_layout_camera" />
 
-    <TextView
-        android:id="@+id/qr_location"
+    <ImageView
+        android:id="@+id/qr_icon_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginStart="80dp"
         android:gravity="center"
-        android:text="Lokasinya"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/frame_layout_camera"
+        android:contentDescription="Status QRCODE" />
+
+    <TextView
+        android:id="@+id/qr_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center_horizontal"
+        android:text="Loading..."
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@id/qr_result"
+        app:layout_constraintTop_toBottomOf="@id/qr_result" />
+
+    <FrameLayout
+        android:id="@+id/frame_layout_camera"
+        android:layout_width="360dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/qr_result" />
+        app:layout_constraintTop_toBottomOf="@id/qr_scan"
+        />
+    <!--        android:visibility="gone"-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
