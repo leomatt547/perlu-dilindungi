@@ -3,6 +3,10 @@ package com.android72.perludilindungi.ui.checkin
 import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
 import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
@@ -12,9 +16,8 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import com.android72.perludilindungi.backend.api.RetrofitAPI
-import com.android72.perludilindungi.backend.model.CheckinDataModal
 import com.android72.perludilindungi.R
+import com.android72.perludilindungi.backend.api.RetrofitAPI
 import com.android72.perludilindungi.backend.model.CheckinData
 import com.android72.perludilindungi.databinding.ActivityCheckinBinding
 import com.google.android.gms.location.*
@@ -25,15 +28,19 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.*
 
 
-class CheckinActivity : AppCompatActivity(), ZXingScannerView.ResultHandler, View.OnClickListener{
+class CheckinActivity : AppCompatActivity(), ZXingScannerView.ResultHandler, View.OnClickListener,
+    SensorEventListener {
     private lateinit var binding: ActivityCheckinBinding
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private val PERMISSIONLOCATIONID = 1010
     private var longitude = ""
     private var latitude = ""
     private lateinit var mScannerView: ZXingScannerView
+    private lateinit var sensorManager: SensorManager
+    private var timer: Timer? = null
     private fun checkPermission():Boolean{
         //this function will return a boolean
         //true: if we have permission
@@ -96,7 +103,7 @@ class CheckinActivity : AppCompatActivity(), ZXingScannerView.ResultHandler, Vie
     }
 
     fun NewLocationData(){
-        var locationRequest =  LocationRequest()
+        val locationRequest =  LocationRequest()
         locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
         locationRequest.interval = 0
         locationRequest.fastestInterval = 0
@@ -143,11 +150,7 @@ class CheckinActivity : AppCompatActivity(), ZXingScannerView.ResultHandler, Vie
         binding = ActivityCheckinBinding.inflate(layoutInflater)
         setContentView(binding.root)
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
-//        Log.d("Debug:",CheckPermission().toString())
-//        Log.d("Debug:",isLocationEnabled().toString())
-//        fusedLocationProviderClient.lastLocation.addOnSuccessListener{location: Location? ->
-//            binding.qrLocation.text = location?.latitude.toString() + "," + location?.longitude.toString()
-//        }
+        sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
         initScannerView()
         initDefaultView()
     }
@@ -200,8 +203,9 @@ class CheckinActivity : AppCompatActivity(), ZXingScannerView.ResultHandler, Vie
     }
 
     override fun onPause() {
-        mScannerView.stopCamera()
         super.onPause()
+        mScannerView.stopCamera()
+        unregisterAll();
     }
 
     private fun initDefaultView() {
@@ -295,6 +299,54 @@ class CheckinActivity : AppCompatActivity(), ZXingScannerView.ResultHandler, Vie
                 }
             }
         })
+    }
+
+    override fun onResume() {
+        super.onResume()
+        simulateAmbientTemperature()
+    }
+
+    private fun loadAmbientTemperature() {
+        val sensor = sensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE)
+        if (sensor != null) {
+            sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL)
+        } else {
+            Toast.makeText(this, "No Ambient Temperature Sensor !", Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun unregisterAll() {
+        timer?.cancel()
+        sensorManager.unregisterListener(this)
+    }
+
+    override fun onSensorChanged(sensorEvent: SensorEvent) {
+        if (sensorEvent.values.isNotEmpty()) {
+            binding.qrTemperature.text = sensorEvent.values[0].toString()
+            Log.d("Debug","Suhu: "+ sensorEvent.values[0].toString())
+        }
+    }
+
+    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
+        //
+    }
+
+    private fun simulateAmbientTemperature() {
+        timer = Timer()
+        timer!!.scheduleAtFixedRate(object : TimerTask() {
+            override fun run() {
+                val temperature = randInt(20, 40)
+                runOnUiThread {
+                    binding.qrTemperature.text = "$temperature°C"
+                }
+            }
+        }, 0, 3500)
+    }
+
+    private fun randInt(min: Int, max: Int): Int {
+        require(min < max) { "max must be greater than min" }
+        val r = Random()
+        return r.nextInt(max - min + 1) + min
     }
 
 }
