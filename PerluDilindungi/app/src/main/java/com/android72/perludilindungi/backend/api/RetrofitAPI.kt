@@ -2,6 +2,7 @@ package com.android72.perludilindungi.backend.api
 
 import com.android72.perludilindungi.backend.model.CheckinData
 import com.android72.perludilindungi.backend.model.FaskesData
+import com.android72.perludilindungi.ui.berita.BeritaData
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -13,4 +14,7 @@ interface RetrofitAPI {
 
     @GET("get-faskes-vaksinasi")
     fun getFaskes(@Body faskesData: FaskesData): Call<FaskesData>
+
+    @GET("/api/get-news")
+    fun beritaData(): Call<BeritaData>
 }
