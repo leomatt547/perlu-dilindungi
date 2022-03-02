@@ -5,4 +5,5 @@
     <string name="title_bookmark">Bookmark</string>
     <string name="title_checkin">Check In</string>
     <string name="qr_code_scanner">QR Code Scanner</string>
+    <string name="bookmark_faskes" />
 </resources>
