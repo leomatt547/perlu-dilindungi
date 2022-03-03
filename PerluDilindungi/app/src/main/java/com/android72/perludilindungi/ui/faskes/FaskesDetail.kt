@@ -1,5 +1,7 @@
 package com.android72.perludilindungi.ui.faskes
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -19,7 +21,8 @@ class FaskesDetail : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-
+    private var latitude: Float? =null
+    private var longitude: Float? =null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -32,6 +35,12 @@ class FaskesDetail : Fragment() {
         _binding = FragmentDetailBinding.inflate(inflater, container, false)
 
         val root: View = binding.root
+        _binding!!.btnMaps.setOnClickListener { // Creates an Intent that will load a map of San Francisco
+            val gmmIntentUri = Uri.parse("geo:${latitude!!},${longitude!!}")
+            val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+            mapIntent.setPackage("com.google.android.apps.maps")
+            startActivity(mapIntent)
+        }
 
         /*val textView: TextView = binding.textHome
         faskesViewModel.text.observe(viewLifecycleOwner, Observer {
