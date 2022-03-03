@@ -10,4 +10,8 @@ class BeritaViewModel : ViewModel() {
         value = "This is berita Fragment"
     }
     val text: LiveData<String> = _text
+
+    fun switchToWeb(beritaLink: String) {
+
+    }
 }

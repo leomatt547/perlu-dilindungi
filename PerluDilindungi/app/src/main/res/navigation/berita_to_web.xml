@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/berita_to_web"
+    app:startDestination="@id/beritaPage">
+
+    <fragment
+        android:id="@+id/beritaPage"
+        android:label="@string/title_berita"
+        android:name="com.android72.perludilindungi.ui.berita.BeritaFragment"
+        tools:layout="@layout/fragment_berita"
+        >
+    <action
+        android:id="@+id/action_beritaPage"
+        app:destination="@id/beritaWebPage"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/beritaWebPage"
+        android:label="@string/title_berita"
+        android:name="com.android72.perludilindungi.ui.berita.WebViewFragment"
+        tools:layout="@layout/web_berita"
+        >
+        <argument
+            android:name="url"
+            app:argType="string"/>
+
+    </fragment>
+
+</navigation>
