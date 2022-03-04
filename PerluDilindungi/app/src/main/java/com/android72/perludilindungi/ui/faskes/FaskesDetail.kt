@@ -17,85 +17,43 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class FaskesDetail : Fragment() {
+class FaskesDetail(private var listFaskesDetailData: Faskes) : Fragment() {
 
     //private lateinit var faskesViewModel: FaskesViewModel
-    private var _binding: FragmentDetailBinding? = null
+    private lateinit var _binding: FragmentDetailBinding
 
     // This property is only valid between onCreateView and
     // onDestroyView.
-    private val binding get() = _binding!!
-    private var latitude: Float? =null
-    private var longitude: Float? =null
+    private val binding get() = _binding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        /*faskesViewModel =
-            ViewModelProvider(this).get(FaskesViewModel::class.java)
-         */
-
         _binding = FragmentDetailBinding.inflate(inflater, container, false)
 
         val root: View = binding.root
+
+        _binding.lblFaskesKode.text = listFaskesDetailData.kode
+        _binding.lblFaskesNama.text = listFaskesDetailData.nama
+        _binding.lblFaskesAlamat.text = listFaskesDetailData.alamat
+        _binding.lblFaskesTelp.text = listFaskesDetailData.telp
+        _binding.lblFaskesJenis.text = listFaskesDetailData.jenis_faskes
+        if (listFaskesDetailData.status == "Siap Vaksinasi") {
+            _binding.imvFaskesStatus.setImageResource(R.drawable.ic_round_check_circle_80)
+            _binding.lblFaskesStatus.text = "SIAP VAKSINASI"
+        }else {
+            _binding.imvFaskesStatus.setImageResource(R.drawable.ic_round_cancel_red_80)
+            _binding.lblFaskesStatus.text = "TIDAK SIAP VAKSINASI"
+        }
+
         _binding!!.btnMaps.setOnClickListener { // Creates an Intent that will load a map of San Francisco
-            val gmmIntentUri = Uri.parse("geo:${latitude!!},${longitude!!}")
+            val gmmIntentUri = Uri.parse("geo:${listFaskesDetailData.latitude},${listFaskesDetailData.longitude}")
             val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
             mapIntent.setPackage("com.google.android.apps.maps")
             startActivity(mapIntent)
         }
 
-        /*val textView: TextView = binding.textHome
-        faskesViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
-         */
         return root
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
-    private fun getFaskesData(province: String, city: String) {
-        val retrofitBuilder = Retrofit.Builder()
-            .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl("https://perludilindungi.herokuapp.com")
-            .build()
-        val retrofitAPI: RetrofitAPI = retrofitBuilder.create(RetrofitAPI::class.java)
-        val retrofitData = retrofitAPI.getFaskes(province, city);
-        retrofitData.enqueue(object : Callback<FaskesData?> {
-            override fun onResponse(call: Call<FaskesData?>?, response: Response<FaskesData?>?) {
-                val responseBody = response!!.body()!!
-
-                if (responseBody.success) {
-                    for (faskes in responseBody.data) {
-                        val faskesKode = faskes.kode
-                        val faskesNama = faskes.nama
-                        val faskesAlamat = faskes.alamat
-                        val faskesTelp = faskes.telp
-                        val faskesJenis = faskes.jenis_faskes
-                        val faskesStatus = faskes.status
-
-                        if(faskesStatus == "Siap Vaksinasi"){
-                            binding.imvFaskesStatus.setImageResource(R.drawable.ic_round_check_circle_80)
-                            binding.lblFaskesStatus.text = "SIAP VAKSINASI"
-                        }else {
-                            binding.imvFaskesStatus.setImageResource(R.drawable.ic_round_cancel_red_80)
-                            binding.lblFaskesStatus.text = "TIDAK SIAP VAKSINASI"
-                        }
-                    }
-                }
-                else {
-                    Log.v("TAG", "Cannot get Data from API");
-                }
-            }
-
-            override fun onFailure(call: Call<FaskesData?>?, t: Throwable?) {
-                Log.d("BeritaFragment","onFailure"+t!!.message)
-            }
-        })
     }
 }

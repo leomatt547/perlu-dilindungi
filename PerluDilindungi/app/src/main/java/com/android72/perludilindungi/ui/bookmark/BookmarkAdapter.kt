@@ -34,7 +34,7 @@ class BookmarkAdapter: RecyclerView.Adapter<BookmarkAdapter.MyViewHolder>() {
         // below buat click navigate to faskes detail
         holder.itemView.rowLayout.setOnClickListener {
             //val action = ListItemDirections.actionListItemToFragmentBookmarkDetail(currentItem)
-            holder.itemView.findNavController().navigate(R.id.action_listItem_to_fragmentBookmarkDetail)
+            holder.itemView.findNavController().navigate(R.id.action_listItem_to_fragmentDetail)
         }
     }
 

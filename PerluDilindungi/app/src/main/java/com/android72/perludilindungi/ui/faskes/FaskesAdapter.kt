@@ -4,18 +4,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.android72.perludilindungi.R
+import com.google.android.material.card.MaterialCardView
 
 class FaskesAdapter(private var listFaskes: ArrayList<Faskes>)
     : RecyclerView.Adapter<FaskesAdapter.MyViewHolder>() {
 
-    class MyViewHolder(view: View): RecyclerView.ViewHolder(view) {
-        var faskesNama: TextView = view.findViewById(R.id.faskesNama)
-        var faskesJenis: TextView = view.findViewById(R.id.faskesJenis)
-        var faskesAlamat: TextView = view.findViewById(R.id.faskesAlamat)
-        var faskesTelp: TextView = view.findViewById(R.id.faskesTelp)
-        var faskesKode: TextView = view.findViewById(R.id.faskesKode)
+    class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+        var faskesNama: TextView = itemView.findViewById(R.id.faskesNama)
+        var faskesJenis: TextView = itemView.findViewById(R.id.faskesJenis)
+        var faskesAlamat: TextView = itemView.findViewById(R.id.faskesAlamat)
+        var faskesTelp: TextView = itemView.findViewById(R.id.faskesTelp)
+        var faskesKode: TextView = itemView.findViewById(R.id.faskesKode)
+        var faskesLayout: MaterialCardView = itemView.findViewById(R.id.rowLayout)
 
         fun faskesNamaBind(txt: String) {
             faskesNama.setText(txt)
@@ -39,8 +42,7 @@ class FaskesAdapter(private var listFaskes: ArrayList<Faskes>)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FaskesAdapter.MyViewHolder {
-        var itemView: View = LayoutInflater.from(parent.context).inflate(R.layout.row_faskes, parent, false);
-        return FaskesAdapter.MyViewHolder(itemView);
+        return MyViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.row_faskes, parent, false))
     }
 
     override fun onBindViewHolder(holder: FaskesAdapter.MyViewHolder, position: Int) {
@@ -55,6 +57,10 @@ class FaskesAdapter(private var listFaskes: ArrayList<Faskes>)
         holder.faskesAlamatBind(faskesAlamatStr)
         holder.faskesTelpBind(faskesTelpStr)
         holder.faskesKodeBind(faskesKodeStr)
+        holder.faskesLayout.setOnClickListener {
+            FaskesDetail(listFaskes.get(position))
+            holder.itemView.findNavController().navigate(R.id.action_listItem_to_fragmentDetail)
+        }
     }
 
     override fun getItemCount(): Int {
