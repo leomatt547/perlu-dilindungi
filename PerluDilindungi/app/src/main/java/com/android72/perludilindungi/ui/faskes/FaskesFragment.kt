@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.*
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android72.perludilindungi.backend.api.RetrofitAPI
 import com.android72.perludilindungi.databinding.FragmentFaskesBinding
+import com.google.android.material.internal.VisibilityAwareImageButton
 import kotlinx.android.synthetic.main.fragment_faskes.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -45,16 +47,18 @@ class FaskesFragment : Fragment() {
         /*faskesViewModel =
             ViewModelProvider(this).get(FaskesViewModel::class.java)
          */
-        val config = resources.configuration
-        _binding = if (config.orientation == ORIENTATION_LANDSCAPE){
-            FragmentFaskesBinding.inflate(inflater, container, false)
-        }else{
-            FragmentFaskesBinding.inflate(inflater, container, false)
-        }
+//        val config = resources.configuration
+//        _binding = if (config.orientation == ORIENTATION_LANDSCAPE){
+//            FragmentFaskesBinding.inflate(inflater, container, false)
+//        }else{
+//            FragmentFaskesBinding.inflate(inflater, container, false)
+//        }
+        _binding = FragmentFaskesBinding.inflate(inflater, container, false)
 
         val root: View = binding.root
         getProvince()
-        recyclerView = _binding!!.recyclerViewFaskes
+        _binding.spinnerCity.visibility = INVISIBLE
+        recyclerView = _binding.recyclerViewFaskes
         recyclerView.layoutManager = LinearLayoutManager(this@FaskesFragment.context)
 
         _binding.btnSearchFaskes.setOnClickListener {
@@ -96,9 +100,10 @@ class FaskesFragment : Fragment() {
                             position: Int,
                             id: Long
                         ) {
-                            Toast.makeText(context, listProvince[position], Toast.LENGTH_SHORT).show()
+                            //Toast.makeText(context, listProvince[position], Toast.LENGTH_SHORT).show()
                             if(listProvince[position] != null){
                                 provinceSelect = listProvince[position]
+                                _binding.spinnerCity.visibility = VISIBLE
                                 getCity(provinceSelect)
                             }
                         }
@@ -145,7 +150,7 @@ class FaskesFragment : Fragment() {
                             position: Int,
                             id: Long
                         ) {
-                            Toast.makeText(context, listCity[position], Toast.LENGTH_SHORT).show()
+                            //Toast.makeText(context, listCity[position], Toast.LENGTH_SHORT).show()
                             citySelect = listCity[position]
                         }
 
@@ -179,6 +184,8 @@ class FaskesFragment : Fragment() {
                 if (call != null) {
                     Log.d(TAG, "onResponse: call =" + call.request().url())
                 }
+                listFaskes.clear()
+                listFaskes = ArrayList<Faskes>()
                 if (responseBody.success) {
                     var i = 0
                     if (responseBody.data.isNotEmpty()){
