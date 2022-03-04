@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.android72.perludilindungi.R
 import kotlinx.android.synthetic.main.list_item.view.*
 
-class ListItem : Fragment() {
+class ItemList : Fragment() {
 
     private lateinit var mBookmarkViewModel: BookmarkViewModel
 

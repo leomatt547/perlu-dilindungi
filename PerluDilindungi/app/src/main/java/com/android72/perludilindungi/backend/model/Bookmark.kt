@@ -12,5 +12,5 @@ data class Bookmark(
     @ColumnInfo(name = "alamat") val alamat: String?,
     @ColumnInfo(name = "telp") val telp: String?,
     @ColumnInfo(name = "jenis_faskes") val jenis_faskes: String?,
-    //@ColumnInfo(name = "status") val status: String?,
+    @ColumnInfo(name = "status") val status: String?,
 )

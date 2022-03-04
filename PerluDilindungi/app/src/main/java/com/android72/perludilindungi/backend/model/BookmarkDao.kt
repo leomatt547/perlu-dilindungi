@@ -12,10 +12,19 @@ interface BookmarkDao {
     @Query("SELECT * FROM bookmark_table ORDER BY id ASC")
     fun readAllData(): LiveData<List<Bookmark>>
 
-    @Delete
-    suspend fun deleteUser(bookmark: Bookmark)
+    /* @Delete
+    suspend fun deleteBookmark(bookmark: Bookmark) */
+
+    @Query("DELETE FROM bookmark_table WHERE id = :id")
+    suspend fun deleteBookmark(id: Int)
 
     @Query("DELETE FROM bookmark_table")
-    suspend fun deleteAllUsers()
+    suspend fun deleteAllBookmarks()
+
+    @Query("SELECT * FROM bookmark_table WHERE id = :id")
+    fun checkBookmarkExist(id : Int) : LiveData<List<Bookmark>>
+
+    /*@Query("SELECT EXISTS (SELECT * FROM bookmark_table WHERE id = :id)")
+    fun selectIfExists(id: Int): LiveData<List<Bookmark>> */
 
 }

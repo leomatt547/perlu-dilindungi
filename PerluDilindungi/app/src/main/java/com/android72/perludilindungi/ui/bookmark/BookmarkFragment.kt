@@ -1,7 +1,6 @@
 package com.android72.perludilindungi.ui.bookmark
 
 import android.os.Bundle
-import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,14 +8,15 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.RecyclerView
 import com.android72.perludilindungi.R
 import com.android72.perludilindungi.backend.model.Bookmark
 import com.android72.perludilindungi.databinding.FragmentBookmarkBinding
-import com.android72.perludilindungi.ui.berita.BeritaAdapter
 import kotlinx.android.synthetic.main.fragment_berita.*
 import kotlinx.android.synthetic.main.fragment_bookmark.*
+import kotlinx.android.synthetic.main.fragment_bookmark.view.*
+import kotlinx.android.synthetic.main.fragment_bookmark_detail.view.*
 
 class BookmarkFragment : Fragment() {
 
@@ -42,9 +42,18 @@ class BookmarkFragment : Fragment() {
 
         mBookmarkViewModel = ViewModelProvider(this).get(BookmarkViewModel::class.java)
 
-        /*add_btn.setOnClickListener {
+        root.add_btn.setOnClickListener {
+            //below to check if data exist, masih eror tapi fungsinya :(
+            // val result = checkBookmarkExist()
+
+            // to add to database
             insertDataToDatabase()
-        } */
+
+            // to delete from database
+            // deleteDataFromDatabase()
+
+            //Toast.makeText(requireContext(), "Successfully clicked!", Toast.LENGTH_LONG).show()
+        }
 
         return root
     }
@@ -56,11 +65,12 @@ class BookmarkFragment : Fragment() {
 
     private fun insertDataToDatabase() {
         val id = 101
-        val faskesNama = "KLINIK MPR RI"
-        val faskesJenis = "KLINIK"
-        val faskesAlamat = "Gedung MPR-RI, JL. Gatot Subroto, RT.1/RW.3, Gelora, Kecamatan Tanah Abang, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10270, Indonesia"
-        val faskesTelp = "(021) 100001"
-        val faskesKode = "N0000002"
+        val faskesNama = "RS RI"
+        val faskesJenis = "RUMAH SAKIT"
+        val faskesAlamat = "Gedung Mana Hayo RI, JL. Gatot Subroto, RT.1/RW.3, Gelora, Kecamatan Tanah Abang, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10270, Indonesia"
+        val faskesTelp = "(021) 1222001"
+        val faskesKode = "N0000300"
+        val faskesStatus = " Siap Vaksinasi"
 
         // Create User Object
         val bookmark = Bookmark(
@@ -70,14 +80,30 @@ class BookmarkFragment : Fragment() {
             faskesAlamat,
             faskesTelp,
             faskesJenis,
+            faskesStatus
         )
 
         // Add Data to Database
-        mBookmarkViewModel.insert(bookmark)
-        Toast.makeText(requireContext(), "Successfully added!", Toast.LENGTH_LONG).show()
+        mBookmarkViewModel.addBookmark(bookmark)
+        //Toast.makeText(requireContext(), "Successfully added!", Toast.LENGTH_LONG).show()
 
-        // Navigate Back
-        // findNavController().navigate(R.id.action_addFragment_to_listFragment)
-        // refresh fragment instead
+    }
+
+    private fun deleteDataFromDatabase() {
+        val id = 101
+
+        mBookmarkViewModel.deleteBookmark(id)
+        findNavController().navigate(R.id.action_fragmentBookmarkDetail_to_listItem)
+    }
+
+    private fun checkBookmarkExist() {
+        val id = 101
+
+        // Check Data in Database
+        val result = mBookmarkViewModel.checkBookmarkExist(id)
+
+        Toast.makeText(requireContext(), result.toString(), Toast.LENGTH_LONG).show()
+
+        return result
     }
 }

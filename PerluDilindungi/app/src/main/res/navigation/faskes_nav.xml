@@ -7,16 +7,20 @@
 
     <fragment
         android:id="@+id/listItem"
-        android:name="com.android72.perludilindungi.ui.bookmark.ListItem"
+        android:name="com.android72.perludilindungi.ui.bookmark.ItemList"
         android:label="list_item"
         tools:layout="@layout/list_item" >
         <action
-            android:id="@+id/action_listItem_to_faskesDetail"
-            app:destination="@id/faskesDetail" />
+            android:id="@+id/action_listItem_to_fragmentBookmarkDetail"
+            app:destination="@id/fragmentBookmarkDetail" />
     </fragment>
     <fragment
-        android:id="@+id/faskesDetail"
+        android:id="@+id/fragmentBookmarkDetail"
         android:name="com.android72.perludilindungi.ui.faskes.FaskesDetail"
-        android:label="fragment_detail"
-        tools:layout="@layout/fragment_detail" />
+        android:label="fragment_bookmark_detail"
+        tools:layout="@layout/fragment_bookmark_detail" >
+        <action
+            android:id="@+id/action_fragmentBookmarkDetail_to_listItem"
+            app:destination="@id/listItem" />
+    </fragment>
 </navigation>

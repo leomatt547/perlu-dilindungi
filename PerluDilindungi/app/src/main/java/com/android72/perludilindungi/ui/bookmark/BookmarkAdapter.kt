@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.android72.perludilindungi.R
 import com.android72.perludilindungi.backend.model.Bookmark
 import kotlinx.android.synthetic.main.row_faskes.view.*
+import androidx.navigation.findNavController
 
 class BookmarkAdapter: RecyclerView.Adapter<BookmarkAdapter.MyViewHolder>() {
 
@@ -32,8 +33,8 @@ class BookmarkAdapter: RecyclerView.Adapter<BookmarkAdapter.MyViewHolder>() {
 
         // below buat click navigate to faskes detail
         holder.itemView.rowLayout.setOnClickListener {
-            /* val action = ListFragmentDirections.actionListFragmentToUpdateFragment(currentItem)
-            holder.itemView.findNavController().navigate(action) */
+            //val action = ListItemDirections.actionListItemToFragmentBookmarkDetail(currentItem)
+            holder.itemView.findNavController().navigate(R.id.action_listItem_to_fragmentBookmarkDetail)
         }
     }
 
