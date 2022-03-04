@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/faskes_nav"
+    app:startDestination="@id/listItem">
+
+    <fragment
+        android:id="@+id/listItem"
+        android:name="com.android72.perludilindungi.ui.bookmark.ListItem"
+        android:label="list_item"
+        tools:layout="@layout/list_item" >
+        <action
+            android:id="@+id/action_listItem_to_faskesDetail"
+            app:destination="@id/faskesDetail" />
+    </fragment>
+    <fragment
+        android:id="@+id/faskesDetail"
+        android:name="com.android72.perludilindungi.ui.faskes.FaskesDetail"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail" />
+</navigation>
