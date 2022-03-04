@@ -1,16 +1,19 @@
 package com.android72.perludilindungi.ui.berita
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -96,7 +99,9 @@ class BeritaFragment : Fragment(), linkClickListener {
     }
 
     override fun navigateToWeb(url: String) {
-        val action = BeritaFragmentDirections.actionBeritaPage(url)
-        findNavController().navigate(action)
+        val intent = Intent(activity, WebViewActivity::class.java).apply {
+            putExtra("URL_TO_WEB", url);
+        }
+        startActivity(intent);
     }
 }
