@@ -19,7 +19,7 @@
     <fragment
         android:id="@+id/beritaWebPage"
         android:label="@string/title_berita"
-        android:name="com.android72.perludilindungi.ui.berita.WebViewFragment"
+        android:name="com.android72.perludilindungi.ui.berita.WebViewActivity"
         tools:layout="@layout/web_berita"
         >
         <argument
