@@ -1,24 +1,20 @@
 package com.android72.perludilindungi.ui.faskes
 
+import android.content.ContentValues.TAG
+import android.content.res.Configuration.ORIENTATION_LANDSCAPE
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.android72.perludilindungi.R
 import com.android72.perludilindungi.backend.api.RetrofitAPI
-import com.android72.perludilindungi.ui.faskes.FaskesData
-import com.android72.perludilindungi.ui.faskes.ProvinceData
 import com.android72.perludilindungi.databinding.FragmentFaskesBinding
-import com.android72.perludilindungi.ui.berita.Berita
-import com.android72.perludilindungi.ui.berita.BeritaAdapter
-import com.android72.perludilindungi.ui.berita.BeritaData
 import kotlinx.android.synthetic.main.fragment_faskes.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -49,8 +45,12 @@ class FaskesFragment : Fragment() {
         /*faskesViewModel =
             ViewModelProvider(this).get(FaskesViewModel::class.java)
          */
-
-        _binding = FragmentFaskesBinding.inflate(inflater, container, false)
+        val config = resources.configuration
+        _binding = if (config.orientation == ORIENTATION_LANDSCAPE){
+            FragmentFaskesBinding.inflate(inflater, container, false)
+        }else{
+            FragmentFaskesBinding.inflate(inflater, container, false)
+        }
 
         val root: View = binding.root
         getProvince()
@@ -74,7 +74,8 @@ class FaskesFragment : Fragment() {
             .baseUrl("https://perludilindungi.herokuapp.com")
             .build()
         val retrofitAPI: RetrofitAPI = retrofitBuilder.create(RetrofitAPI::class.java)
-        val retrofitData = retrofitAPI.getProvince();
+        val retrofitData = retrofitAPI.getProvince()
+        provinceSelect = "ACEH"
         retrofitData.enqueue(object : Callback<ProvinceData?> {
             override fun onResponse(call: Call<ProvinceData?>?, response: Response<ProvinceData?>?) {
                 val responseBody = response!!.body()!!
@@ -96,8 +97,10 @@ class FaskesFragment : Fragment() {
                             id: Long
                         ) {
                             Toast.makeText(context, listProvince[position], Toast.LENGTH_SHORT).show()
-                            provinceSelect = listProvince[position]
-                            getCity(provinceSelect)
+                            if(listProvince[position] != null){
+                                provinceSelect = listProvince[position]
+                                getCity(provinceSelect)
+                            }
                         }
 
                         override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -125,7 +128,7 @@ class FaskesFragment : Fragment() {
         retrofitData.enqueue(object : Callback<CityData?> {
             override fun onResponse(call: Call<CityData?>?, response: Response<CityData?>?) {
                 val responseBody = response!!.body()!!
-
+                listCity.clear()
                 if (responseBody.curr_val != null) {
                     for (city in responseBody.results) {
                         val cityValue = city.value
@@ -167,26 +170,34 @@ class FaskesFragment : Fragment() {
             .baseUrl("https://perludilindungi.herokuapp.com")
             .build()
         val retrofitAPI: RetrofitAPI = retrofitBuilder.create(RetrofitAPI::class.java)
-        val retrofitData = retrofitAPI.getFaskes(province, city);
+//        Log.d(TAG, "onResponse: province =$province")
+//        Log.d(TAG, "onResponse: city =$city")
+        val retrofitData = retrofitAPI.getFaskes(province, city)
         retrofitData.enqueue(object : Callback<FaskesData?> {
             override fun onResponse(call: Call<FaskesData?>?, response: Response<FaskesData?>?) {
                 val responseBody = response!!.body()!!
-
+                if (call != null) {
+                    Log.d(TAG, "onResponse: call =" + call.request().url())
+                }
                 if (responseBody.success) {
-                    var i: Int = 0
-                    for (faskes in responseBody.results) {
-                        val faskesKode = faskes.kode
-                        val faskesNama = faskes.nama
-                        val faskesAlamat = faskes.alamat
-                        val faskesTelp = faskes.telp
-                        val faskesJenis = faskes.jenis_faskes
-                        listFaskes.add(Faskes(faskesKode, faskesNama, faskesAlamat, faskesTelp, faskesJenis))
-                        i = i + 1
-                        if (i == 5) {
-                            break
+                    var i = 0
+                    if (responseBody.data.isNotEmpty()){
+                        for (faskes in responseBody.data) {
+                            val faskesKode = faskes.kode
+                            val faskesNama = faskes.nama
+                            val faskesAlamat = faskes.alamat
+                            val faskesTelp = faskes.telp
+                            val faskesJenis = faskes.jenis_faskes
+                            listFaskes.add(Faskes(faskesKode, faskesNama, faskesAlamat, faskesTelp, faskesJenis))
+                            i = i + 1
+                            if (i == 5) {
+                                break
+                            }
                         }
+                        recyclerView.adapter = FaskesAdapter(listFaskes)
+                    }else {
+                        Log.v("TAG", "Cannot get Results from API")
                     }
-                    recyclerView.adapter = FaskesAdapter(listFaskes)
                 }
                 else {
                     Log.v("TAG", "Cannot get Data from API")

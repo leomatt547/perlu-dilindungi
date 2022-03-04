@@ -7,17 +7,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Spinner
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.android72.perludilindungi.R
 import com.android72.perludilindungi.backend.api.RetrofitAPI
-import com.android72.perludilindungi.ui.faskes.FaskesData
 import com.android72.perludilindungi.databinding.FragmentDetailBinding
-import com.android72.perludilindungi.ui.berita.Berita
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -78,7 +71,7 @@ class FaskesDetail : Fragment() {
                 val responseBody = response!!.body()!!
 
                 if (responseBody.success) {
-                    for (faskes in responseBody.results) {
+                    for (faskes in responseBody.data) {
                         val faskesKode = faskes.kode
                         val faskesNama = faskes.nama
                         val faskesAlamat = faskes.alamat

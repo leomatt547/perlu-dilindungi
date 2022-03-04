@@ -13,7 +13,7 @@ interface RetrofitAPI {
     fun checkIn(@Body checkinData: CheckinData): Call<CheckinData>
 
     @GET("/api/get-faskes-vaksinasi")
-    fun getFaskes(@Query("province")province: String, @Query("city")city: String): Call<FaskesData>
+    fun getFaskes(@Query("province") province: String, @Query("city") city: String): Call<FaskesData>
 
     @GET("/api/get-news")
     fun beritaData(): Call<BeritaData>
@@ -22,5 +22,5 @@ interface RetrofitAPI {
     fun getProvince(): Call<ProvinceData>;
 
     @GET("/api/get-city")
-    fun getCity(@Query("province")province: String): Call<CityData>;
+    fun getCity(@Query("start_id")province: String): Call<CityData>;
 }

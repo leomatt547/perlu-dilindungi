@@ -28,6 +28,7 @@ class WebViewActivity : AppCompatActivity() {
 
         val newsUrl = intent.getStringExtra("URL_TO_WEB")!!
         Log.v("tag", newsUrl)
+        supportActionBar?.title = newsUrl
         webView = newsWeb
         webView.settings.javaScriptEnabled = true
         webView.webViewClient = object : WebViewClient() {
