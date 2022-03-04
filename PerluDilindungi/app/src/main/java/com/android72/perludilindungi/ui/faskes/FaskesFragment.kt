@@ -190,12 +190,16 @@ class FaskesFragment : Fragment() {
                     var i = 0
                     if (responseBody.data.isNotEmpty()){
                         for (faskes in responseBody.data) {
+                            val faskesId = faskes.id
                             val faskesKode = faskes.kode
                             val faskesNama = faskes.nama
                             val faskesAlamat = faskes.alamat
                             val faskesTelp = faskes.telp
                             val faskesJenis = faskes.jenis_faskes
-                            listFaskes.add(Faskes(faskesKode, faskesNama, faskesAlamat, faskesTelp, faskesJenis))
+                            val faskesStatus = faskes.status
+                            val faskesLatitude = faskes.latitude
+                            val faskesLongitude = faskes.longitude
+                            listFaskes.add(Faskes(faskesId, faskesKode, faskesNama, faskesAlamat, faskesTelp, faskesJenis, faskesStatus, faskesLatitude, faskesLongitude))
                             i = i + 1
                             if (i == 5) {
                                 break

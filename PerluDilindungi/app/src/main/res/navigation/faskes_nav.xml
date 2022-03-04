@@ -11,16 +11,16 @@
         android:label="list_item"
         tools:layout="@layout/list_item" >
         <action
-            android:id="@+id/action_listItem_to_fragmentBookmarkDetail"
-            app:destination="@id/fragmentBookmarkDetail" />
+            android:id="@+id/action_listItem_to_fragmentDetail"
+            app:destination="@id/fragmentDetail" />
     </fragment>
     <fragment
-        android:id="@+id/fragmentBookmarkDetail"
+        android:id="@+id/fragmentDetail"
         android:name="com.android72.perludilindungi.ui.faskes.FaskesDetail"
-        android:label="fragment_bookmark_detail"
-        tools:layout="@layout/fragment_bookmark_detail" >
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail" >
         <action
-            android:id="@+id/action_fragmentBookmarkDetail_to_listItem"
+            android:id="@+id/action_fragmentDetail_to_listItem"
             app:destination="@id/listItem" />
     </fragment>
 </navigation>

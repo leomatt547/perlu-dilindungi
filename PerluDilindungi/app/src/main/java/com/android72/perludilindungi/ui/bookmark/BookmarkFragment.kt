@@ -93,7 +93,7 @@ class BookmarkFragment : Fragment() {
         val id = 101
 
         mBookmarkViewModel.deleteBookmark(id)
-        findNavController().navigate(R.id.action_fragmentBookmarkDetail_to_listItem)
+        findNavController().navigate(R.id.action_fragmentDetail_to_listItem)
     }
 
     private fun checkBookmarkExist() {
