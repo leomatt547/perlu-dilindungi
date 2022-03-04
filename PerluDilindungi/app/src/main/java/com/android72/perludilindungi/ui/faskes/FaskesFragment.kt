@@ -1,22 +1,41 @@
 package com.android72.perludilindungi.ui.faskes
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.android72.perludilindungi.R
+import com.android72.perludilindungi.backend.api.RetrofitAPI
+import com.android72.perludilindungi.ui.faskes.FaskesData
+import com.android72.perludilindungi.ui.faskes.ProvinceData
 import com.android72.perludilindungi.databinding.FragmentFaskesBinding
+import com.android72.perludilindungi.ui.berita.Berita
+import com.android72.perludilindungi.ui.berita.BeritaAdapter
+import com.android72.perludilindungi.ui.berita.BeritaData
+import kotlinx.android.synthetic.main.fragment_faskes.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class FaskesFragment : Fragment() {
 
     //private lateinit var faskesViewModel: FaskesViewModel
-    private var _binding: FragmentFaskesBinding? = null
-    //private lateinit var recyclerView: RecyclerView;
+    private lateinit var _binding: FragmentFaskesBinding
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var provinceSelect: String
+    private lateinit var citySelect: String
+    var listProvince: ArrayList<String> = ArrayList()
+    var listCity: ArrayList<String> = ArrayList()
+    var listFaskes: ArrayList<Faskes> = ArrayList()
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -34,11 +53,13 @@ class FaskesFragment : Fragment() {
         _binding = FragmentFaskesBinding.inflate(inflater, container, false)
 
         val root: View = binding.root
-        /*recyclerView = _binding!!.recyclerView
-        recyclerView.layoutManager = LinearLayoutManager(_binding!!.fragmentFaskes.context);
-        recyclerView.adapter = FaskesAdapter();
-         */
+        getProvince()
+        recyclerView = _binding!!.recyclerViewFaskes
+        recyclerView.layoutManager = LinearLayoutManager(this@FaskesFragment.context)
 
+        _binding.btnSearchFaskes.setOnClickListener {
+            getFaskesData(provinceSelect, citySelect)
+        }
         /*val textView: TextView = binding.textHome
         faskesViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
@@ -47,8 +68,134 @@ class FaskesFragment : Fragment() {
         return root
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    private fun getProvince() {
+        val retrofitBuilder = Retrofit.Builder()
+            .addConverterFactory(GsonConverterFactory.create())
+            .baseUrl("https://perludilindungi.herokuapp.com")
+            .build()
+        val retrofitAPI: RetrofitAPI = retrofitBuilder.create(RetrofitAPI::class.java)
+        val retrofitData = retrofitAPI.getProvince();
+        retrofitData.enqueue(object : Callback<ProvinceData?> {
+            override fun onResponse(call: Call<ProvinceData?>?, response: Response<ProvinceData?>?) {
+                val responseBody = response!!.body()!!
+
+                if (responseBody.curr_val != null) {
+                    for (province in responseBody.results) {
+                        val provinceValue = province.value
+                        listProvince.add(provinceValue)
+                    }
+                    val spinProvinceAdapter = context?.let { ArrayAdapter(it, android.R.layout.simple_spinner_item, listProvince) }
+                    spinner_province.adapter = spinProvinceAdapter
+
+                    spinner_province.onItemSelectedListener = object :
+                    AdapterView.OnItemSelectedListener {
+                        override fun onItemSelected(
+                            parent: AdapterView<*>?,
+                            view: View?,
+                            position: Int,
+                            id: Long
+                        ) {
+                            Toast.makeText(context, listProvince[position], Toast.LENGTH_SHORT).show()
+                            provinceSelect = listProvince[position]
+                            getCity(provinceSelect)
+                        }
+
+                        override fun onNothingSelected(p0: AdapterView<*>?) {
+                        }
+                    }
+                }
+                else {
+                    Log.v("TAG", "Cannot get Data from API");
+                }
+            }
+
+            override fun onFailure(call: Call<ProvinceData?>?, t: Throwable?) {
+                Log.d("FaskesFragment","onFailure"+t!!.message)
+            }
+        })
+    }
+
+    private fun getCity(province: String) {
+        val retrofitBuilder = Retrofit.Builder()
+            .addConverterFactory(GsonConverterFactory.create())
+            .baseUrl("https://perludilindungi.herokuapp.com")
+            .build()
+        val retrofitAPI: RetrofitAPI = retrofitBuilder.create(RetrofitAPI::class.java)
+        val retrofitData = retrofitAPI.getCity(province)
+        retrofitData.enqueue(object : Callback<CityData?> {
+            override fun onResponse(call: Call<CityData?>?, response: Response<CityData?>?) {
+                val responseBody = response!!.body()!!
+
+                if (responseBody.curr_val != null) {
+                    for (city in responseBody.results) {
+                        val cityValue = city.value
+                        listCity.add(cityValue)
+                    }
+                    val spinCityAdapter = context?.let { ArrayAdapter(it, android.R.layout.simple_spinner_item, listCity) }
+                    spinner_city.adapter = spinCityAdapter
+
+                    spinner_city.onItemSelectedListener = object :
+                        AdapterView.OnItemSelectedListener {
+                        override fun onItemSelected(
+                            parent: AdapterView<*>?,
+                            view: View?,
+                            position: Int,
+                            id: Long
+                        ) {
+                            Toast.makeText(context, listCity[position], Toast.LENGTH_SHORT).show()
+                            citySelect = listCity[position]
+                        }
+
+                        override fun onNothingSelected(p0: AdapterView<*>?) {
+                        }
+                    }
+                }
+                else {
+                    Log.v("TAG", "Cannot get Data from API");
+                }
+            }
+
+            override fun onFailure(call: Call<CityData?>?, t: Throwable?) {
+                Log.d("FaskesFragment","onFailure"+t!!.message)
+            }
+        })
+    }
+
+    private fun getFaskesData(province: String, city: String) {
+        val retrofitBuilder = Retrofit.Builder()
+            .addConverterFactory(GsonConverterFactory.create())
+            .baseUrl("https://perludilindungi.herokuapp.com")
+            .build()
+        val retrofitAPI: RetrofitAPI = retrofitBuilder.create(RetrofitAPI::class.java)
+        val retrofitData = retrofitAPI.getFaskes(province, city);
+        retrofitData.enqueue(object : Callback<FaskesData?> {
+            override fun onResponse(call: Call<FaskesData?>?, response: Response<FaskesData?>?) {
+                val responseBody = response!!.body()!!
+
+                if (responseBody.success) {
+                    var i: Int = 0
+                    for (faskes in responseBody.results) {
+                        val faskesKode = faskes.kode
+                        val faskesNama = faskes.nama
+                        val faskesAlamat = faskes.alamat
+                        val faskesTelp = faskes.telp
+                        val faskesJenis = faskes.jenis_faskes
+                        listFaskes.add(Faskes(faskesKode, faskesNama, faskesAlamat, faskesTelp, faskesJenis))
+                        i = i + 1
+                        if (i == 5) {
+                            break
+                        }
+                    }
+                    recyclerView.adapter = FaskesAdapter(listFaskes)
+                }
+                else {
+                    Log.v("TAG", "Cannot get Data from API")
+                }
+            }
+
+            override fun onFailure(call: Call<FaskesData?>?, t: Throwable?) {
+                Log.d("BeritaFragment","onFailure"+t!!.message)
+            }
+        })
     }
 }

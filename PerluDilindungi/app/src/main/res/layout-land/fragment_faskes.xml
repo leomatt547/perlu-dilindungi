@@ -45,7 +45,7 @@
                 android:textStyle="bold" />
 
             <Spinner
-                android:id="@+id/spinner_provinsi"
+                android:id="@+id/spinner_province"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -65,7 +65,7 @@
                 android:textStyle="bold" />
 
             <Spinner
-                android:id="@+id/spinner_kota"
+                android:id="@+id/spinner_city"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
