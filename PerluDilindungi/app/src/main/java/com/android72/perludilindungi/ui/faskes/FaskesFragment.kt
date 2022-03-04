@@ -18,6 +18,7 @@ import com.android72.perludilindungi.backend.api.RetrofitAPI
 import com.android72.perludilindungi.databinding.FragmentFaskesBinding
 import com.google.android.material.internal.VisibilityAwareImageButton
 import kotlinx.android.synthetic.main.fragment_faskes.*
+import kotlinx.android.synthetic.main.row_faskes.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -185,7 +186,7 @@ class FaskesFragment : Fragment() {
                     Log.d(TAG, "onResponse: call =" + call.request().url())
                 }
                 listFaskes.clear()
-                listFaskes = ArrayList<Faskes>()
+//                listFaskes = ArrayList<Faskes>()
                 if (responseBody.success) {
                     var i = 0
                     if (responseBody.data.isNotEmpty()){
@@ -193,8 +194,14 @@ class FaskesFragment : Fragment() {
                             val faskesId = faskes.id
                             val faskesKode = faskes.kode
                             val faskesNama = faskes.nama
-                            val faskesAlamat = faskes.alamat
-                            val faskesTelp = faskes.telp
+                            var faskesAlamat = ""
+                            if(faskes.alamat != null){
+                                faskesAlamat = faskes.alamat
+                            }
+                            var faskesTelp = ""
+                            if(faskes.telp != null){
+                                faskesTelp = faskes.telp
+                            }
                             val faskesJenis = faskes.jenis_faskes
                             val faskesStatus = faskes.status
                             val faskesLatitude = faskes.latitude
@@ -205,7 +212,8 @@ class FaskesFragment : Fragment() {
                                 break
                             }
                         }
-                        recyclerView.adapter = FaskesAdapter(listFaskes)
+                        recyclerView.adapter =
+                            this@FaskesFragment.context?.let { FaskesAdapter(it, listFaskes) }
                     }else {
                         Log.v("TAG", "Cannot get Results from API")
                     }

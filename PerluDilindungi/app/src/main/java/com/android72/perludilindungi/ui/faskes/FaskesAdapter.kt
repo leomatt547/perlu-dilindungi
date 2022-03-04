@@ -1,15 +1,19 @@
 package com.android72.perludilindungi.ui.faskes
 
+import android.content.Context
+import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.navigation.findNavController
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.android72.perludilindungi.R
 import com.google.android.material.card.MaterialCardView
 
-class FaskesAdapter(private var listFaskes: ArrayList<Faskes>)
+
+class FaskesAdapter(context: Context, private var listFaskes: ArrayList<Faskes>)
     : RecyclerView.Adapter<FaskesAdapter.MyViewHolder>() {
 
     class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
@@ -58,13 +62,29 @@ class FaskesAdapter(private var listFaskes: ArrayList<Faskes>)
         holder.faskesTelpBind(faskesTelpStr)
         holder.faskesKodeBind(faskesKodeStr)
         holder.faskesLayout.setOnClickListener {
-            FaskesDetail(listFaskes.get(position))
-            holder.itemView.findNavController().navigate(R.id.action_listItem_to_fragmentDetail)
+            //FaskesDetail(listFaskes.get(position))
+//            holder.itemView.findNavController().navigate(R.id.action_listItem_to_fragmentDetail)
+            val intent = Intent( it.context, FaskesDetailActivity::class.java)
+            val bundle = Bundle()
+            //intent.putExtra("listFaskesDetailData", listFaskes[position]as Serializable)
+            intent.putExtra("faskesNamaStr", faskesNamaStr)
+            intent.putExtra("faskesJenisStr", faskesJenisStr)
+            intent.putExtra("faskesAlamatStr", faskesAlamatStr)
+            intent.putExtra("faskesTelpStr", faskesTelpStr)
+            intent.putExtra("faskesKodeStr", faskesKodeStr)
+            intent.putExtra("latitude",  listFaskes.get(position).latitude)
+            intent.putExtra("longitude",  listFaskes.get(position).longitude)
+            intent.putExtra("status",  listFaskes.get(position).status)
+            it.context.startActivity(intent)
         }
     }
 
     override fun getItemCount(): Int {
         return listFaskes.size;
     }
+
+}
+
+private fun Bundle.putParcelableArrayList(s: String, get: Faskes) {
 
 }
