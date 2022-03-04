@@ -4,13 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.DefaultItemAnimator
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.android72.perludilindungi.databinding.ActivityMainBinding
-import com.android72.perludilindungi.ui.berita.Berita
-import com.android72.perludilindungi.ui.berita.BeritaAdapter
 import com.android72.perludilindungi.ui.checkin.CheckinActivity
 import com.google.android.material.tabs.TabLayout
 
@@ -18,19 +13,10 @@ import com.google.android.material.tabs.TabLayout
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-//    private lateinit var recyclerView: RecyclerView
-//    private lateinit var beritadata: ArrayList<Berita>;
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        setContentView(R.layout.fragment_berita);
-//        recyclerView = findViewById(R.id.recyclerView);
-//
-//        setAdapter();
-
-
-
         binding = ActivityMainBinding.inflate(layoutInflater)
+        supportActionBar?.hide()
         setContentView(binding.root)
         val fab: View = binding.fab
         fab.setOnClickListener {
@@ -39,16 +25,6 @@ class MainActivity : AppCompatActivity() {
         }
         setUpTabBar()
     }
-
-//    private fun setAdapter() {
-//        var adapter: BeritaAdapter = BeritaAdapter();
-////        beritadata = adapter.listBerita;
-//        var layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(applicationContext);
-//        recyclerView.layoutManager = layoutManager;
-////        recyclerView.itemAnimator = DefaultItemAnimator();
-//        recyclerView.adapter = adapter;
-//    }
-
 
     private fun setUpTabBar()
     {
