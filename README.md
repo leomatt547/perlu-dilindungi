@@ -11,7 +11,9 @@ Apabila pengguna menekan floating button pada semua layar aplikasi, pengguna aka
 ### Fitur Berita
 Saat membuka aplikasi, halaman pertama yang muncul adalah halaman berita. Halaman ini berisi berita-berita terkini mengenai Covid-19. User dapat scroll ke atas atau bawah untuk melihat berita lainnya serta dapat mengklik salah satu berita untuk melihat artikel lengkap dari berita tersebut
 ### Fitur Faskes
-Isi di sini <Fauzan>
+Apabila pengguna menekan bagian faskes pada navigasi menu, akan muncul halaman search faskes dengan dropdown menu pilihan provinsi dan kota. Setelah memilih provinsi dan kota yang diinginkan, pengguna dapat menekan tombol search untuk menampilkan lima faskes terdekat berdasarkan pilihan provinsi dan kota. </br>
+Jika pengguna menekan salah satu faskes, akan ditampilkan halaman detail informasi faskes. Pada halaman ini pengguna dapat menekan tombol Google Maps untuk melihat lokasi faskes pada aplikasi Google Maps dan menekan tombol bookmark untuk menambahkan atau menghilangkan bookmark pada faskes terkait. </br>
+Selain itu, halaman search faskes memiliki responsive layout, sehingga jika orientasi aplikasi diubah antara portrait dan landscape, akan menampilkan tampilan yang berbeda.
 ### Fitur Bookmark
 Isi di sini <Afifah>
 ## Library yang digunakan dan justifikasi penggunaannya.
@@ -31,7 +33,7 @@ Isi di sini <Fauzan>
 ### Fitur Bookmark
 Isi di sini <Afifah>
 ## Pembagian kerja anggota kelompok.
-1. 13519215 - Leonard Matheus : Membuat Fitur Check-in (QR-Code dan Suhu)
-2. 13519207 - Rafidika Samekto : Membuat Fitur Berita
-3. ***
-4. ***
+1. 13519171 - Fauzan Yubairi Indrayadi : Membuat Fitur Faskes (Search daftar faskes dan detail informasi faskes)
+2. 13519183 - Afifah Fathimah :
+3. 13519207 - Rafidika Samekto : Membuat Fitur Berita
+4. 13519215 - Leonard Matheus : Membuat Fitur Check-in (QR-Code dan Suhu)
