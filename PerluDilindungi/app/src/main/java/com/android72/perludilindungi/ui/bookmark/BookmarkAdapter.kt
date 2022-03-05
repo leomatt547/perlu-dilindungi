@@ -1,5 +1,6 @@
 package com.android72.perludilindungi.ui.bookmark
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,11 +13,13 @@ import kotlinx.android.synthetic.main.row_faskes.view.*
 import androidx.navigation.findNavController
 import com.android72.perludilindungi.ui.faskes.FaskesDetailActivity
 
-class BookmarkAdapter: RecyclerView.Adapter<BookmarkAdapter.MyViewHolder>() {
+class BookmarkAdapter(context: Context): RecyclerView.Adapter<BookmarkAdapter.MyViewHolder>() {
 
     private var bookmarkList = emptyList<Bookmark>()
 
-    class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {}
+    class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         return MyViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.row_faskes, parent, false))
@@ -46,6 +49,9 @@ class BookmarkAdapter: RecyclerView.Adapter<BookmarkAdapter.MyViewHolder>() {
             intent.putExtra("faskesAlamatStr", currentItem.alamat)
             intent.putExtra("faskesTelpStr", currentItem.telp)
             intent.putExtra("faskesKodeStr", currentItem.kode)
+            intent.putExtra("latitude", currentItem.latitude)
+            intent.putExtra("longitude", currentItem.longitude)
+            intent.putExtra("status", currentItem.status)
 //            intent.putExtra("latitude",  holder.itemView.listFaskes.get(position).latitude)
 //            intent.putExtra("longitude",  holder.itemView.listFaskes.get(position).longitude)
 //            intent.putExtra("status",  holder.itemView.listFaskes.get(position).status)

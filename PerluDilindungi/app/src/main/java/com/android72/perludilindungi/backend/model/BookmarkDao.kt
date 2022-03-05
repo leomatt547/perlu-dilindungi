@@ -24,7 +24,4 @@ interface BookmarkDao {
     @Query("SELECT * FROM bookmark_table WHERE id = :id")
     fun checkBookmarkExist(id : Int) : LiveData<List<Bookmark>>
 
-    /*@Query("SELECT EXISTS (SELECT * FROM bookmark_table WHERE id = :id)")
-    fun selectIfExists(id: Int): LiveData<List<Bookmark>> */
-
 }

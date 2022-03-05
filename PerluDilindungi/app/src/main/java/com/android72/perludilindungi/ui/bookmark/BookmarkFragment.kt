@@ -16,7 +16,6 @@ import com.android72.perludilindungi.databinding.FragmentBookmarkBinding
 import kotlinx.android.synthetic.main.fragment_berita.*
 import kotlinx.android.synthetic.main.fragment_bookmark.*
 import kotlinx.android.synthetic.main.fragment_bookmark.view.*
-import kotlinx.android.synthetic.main.fragment_bookmark_detail.view.*
 
 class BookmarkFragment : Fragment() {
 
@@ -42,18 +41,18 @@ class BookmarkFragment : Fragment() {
 
         mBookmarkViewModel = ViewModelProvider(this).get(BookmarkViewModel::class.java)
 
-        root.add_btn.setOnClickListener {
+        /*root.add_btn.setOnClickListener {
             //below to check if data exist, masih eror tapi fungsinya :(
             // val result = checkBookmarkExist()
 
             // to add to database
-            insertDataToDatabase()
+            //insertDataToDatabase()
 
             // to delete from database
             // deleteDataFromDatabase()
 
             //Toast.makeText(requireContext(), "Successfully clicked!", Toast.LENGTH_LONG).show()
-        }
+        } */
 
         return root
     }
@@ -63,7 +62,7 @@ class BookmarkFragment : Fragment() {
         _binding = null
     }
 
-    private fun insertDataToDatabase() {
+    /* private fun insertDataToDatabase() {
         val id = 101
         val faskesNama = "RS RI"
         val faskesJenis = "RUMAH SAKIT"
@@ -105,5 +104,5 @@ class BookmarkFragment : Fragment() {
         Toast.makeText(requireContext(), result.toString(), Toast.LENGTH_LONG).show()
 
         return result
-    }
+    } */
 }

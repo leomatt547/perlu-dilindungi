@@ -48,6 +48,10 @@
                 android:text="Jenis faskes"
                 android:gravity="center"
                 android:textColor="@color/white"
+<<<<<<< HEAD
+
+=======
+>>>>>>> 3c1d1de819b71064d14eb6e26cde9a3790f640cc
                 android:textSize="15sp" />
 
         </LinearLayout>

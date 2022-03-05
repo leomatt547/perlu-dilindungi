@@ -20,7 +20,7 @@ class BookmarkViewModel(application: Application): AndroidViewModel(application)
 
     fun addBookmark(bookmark: Bookmark){
         viewModelScope.launch(Dispatchers.IO) {
-            repository.addBookmark(
+            /*repository.addBookmark(
                 Bookmark(
                     2725,
                     "N0001702",
@@ -29,7 +29,8 @@ class BookmarkViewModel(application: Application): AndroidViewModel(application)
                     "(021) 5715801",
                     "KLINIK",
                     "Siap Vaksinasi"
-            ))
+            )) */
+            repository.addBookmark(bookmark)
         }
     }
 

@@ -21,8 +21,7 @@ class BookmarkRepository(private val bookmarkDao: BookmarkDao) {
     }
 
     fun checkBookmarkExist(id: Int){
-        /*val checkBookmarkExist: LiveData<List<Bookmark>> = bookmarkDao.checkBookmarkExist(id)
-        return checkBookmarkExist */
+        /*val checkBookmarkExist: LiveData<List<Bookmark>> = bookmarkDao.checkBookmarkExist(id) */
 
         bookmarkDao.checkBookmarkExist(id)
     }

@@ -53,6 +53,10 @@ class FaskesAdapter(context: Context, private var listFaskes: ArrayList<Faskes>)
             } else if (txt == "KLINIK") {
                 faskesJenis.setBackgroundColor(Color.parseColor("#7879F1"))
             }
+<<<<<<< HEAD
+
+=======
+>>>>>>> 3c1d1de819b71064d14eb6e26cde9a3790f640cc
         }
     }
 
@@ -66,6 +70,7 @@ class FaskesAdapter(context: Context, private var listFaskes: ArrayList<Faskes>)
         var faskesAlamatStr: String = listFaskes.get(position).alamat
         var faskesTelpStr: String = listFaskes.get(position).telp
         var faskesKodeStr: String = listFaskes.get(position).kode
+        var faskesId: Int = listFaskes.get(position).id
 
         holder.faskesNamaBind(faskesNamaStr)
         holder.faskesJenisBind(faskesJenisStr)
@@ -79,6 +84,7 @@ class FaskesAdapter(context: Context, private var listFaskes: ArrayList<Faskes>)
             val intent = Intent( it.context, FaskesDetailActivity::class.java)
             val bundle = Bundle()
             //intent.putExtra("listFaskesDetailData", listFaskes[position]as Serializable)
+            intent.putExtra("id", faskesId)
             intent.putExtra("faskesNamaStr", faskesNamaStr)
             intent.putExtra("faskesJenisStr", faskesJenisStr)
             intent.putExtra("faskesAlamatStr", faskesAlamatStr)

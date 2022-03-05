@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android72.perludilindungi.R
+import com.android72.perludilindungi.ui.faskes.FaskesAdapter
 import kotlinx.android.synthetic.main.list_item.view.*
 
 class ItemList : Fragment() {
@@ -23,7 +24,7 @@ class ItemList : Fragment() {
         val view = inflater.inflate(R.layout.list_item, container, false)
 
         // Recyclerview
-        val adapter = BookmarkAdapter()
+        val adapter = BookmarkAdapter(context?.let { BookmarkAdapter(it) })
         val recyclerView = view.recyclerview
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
