@@ -21,17 +21,22 @@ Pada halaman detail informasi faskes dan menekan sebuah tombol yang akan berubah
 | :--   | :------ |
 | Zxing | Untuk membuat intent mengenai QR-Code dan lifecycle activity yang ada |
 | Retrofit | Untuk menyediakan komunikasi backend pada aplikasi android |
-| Lain-lain | Lain-lain
+| sqlite room | Menyediakan abstraksi layer untuk mempermudah operasi sqlite |
 ## Screenshot aplikasi (dimasukkan dalam folder screenshot).
 ### Fitur Check-in
-Isi di sini <Leonard>
+![](./assets/md-checkin-black.jpg)
+![](./assets/md-checkin-green.jpg)
+![](./assets/md-checkin-red.jpg)
+![](./assets/md-checkin-yellow.jpg)
 ### Fitur Berita
 ![Halaman Berita](./assets/md-berita.png)
 ![Halaman Web Berita](./assets/md-beritaWeb.png)
 ### Fitur Faskes
-Isi di sini <Fauzan>
+![](./assets/md-faskes.jpg)
+![](./assets/md-faskes-land.jpg)
+![](./assets/md-detailfaskes.jpg)
 ### Fitur Bookmark
-Isi di sini <Afifah>
+![](./assets/md-bookmark.jpg)
 ## Pembagian kerja anggota kelompok.
 1. 13519171 - Fauzan Yubairi Indrayadi : Membuat Fitur Faskes (Search daftar faskes dan detail informasi faskes)
 2. 13519183 - Afifah Fathimah : Membuat Fitur Bookmark dan Recycle View Faskes
