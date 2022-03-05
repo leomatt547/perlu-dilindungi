@@ -1,6 +1,5 @@
 package com.android72.perludilindungi.ui.bookmark
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,10 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.android72.perludilindungi.R
 import com.android72.perludilindungi.backend.model.Bookmark
 import kotlinx.android.synthetic.main.row_faskes.view.*
-import androidx.navigation.findNavController
 import com.android72.perludilindungi.ui.faskes.FaskesDetailActivity
 
-class BookmarkAdapter(context: Context): RecyclerView.Adapter<BookmarkAdapter.MyViewHolder>() {
+class BookmarkAdapter(): RecyclerView.Adapter<BookmarkAdapter.MyViewHolder>() {
 
     private var bookmarkList = emptyList<Bookmark>()
 

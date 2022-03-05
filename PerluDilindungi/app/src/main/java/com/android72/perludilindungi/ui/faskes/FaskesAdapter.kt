@@ -53,10 +53,6 @@ class FaskesAdapter(context: Context, private var listFaskes: ArrayList<Faskes>)
             } else if (txt == "KLINIK") {
                 faskesJenis.setBackgroundColor(Color.parseColor("#7879F1"))
             }
-<<<<<<< HEAD
-
-=======
->>>>>>> 3c1d1de819b71064d14eb6e26cde9a3790f640cc
         }
     }
 
@@ -100,9 +96,5 @@ class FaskesAdapter(context: Context, private var listFaskes: ArrayList<Faskes>)
     override fun getItemCount(): Int {
         return listFaskes.size;
     }
-
-}
-
-private fun Bundle.putParcelableArrayList(s: String, get: Faskes) {
 
 }

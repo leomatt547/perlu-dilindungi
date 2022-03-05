@@ -9,7 +9,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android72.perludilindungi.R
-import com.android72.perludilindungi.ui.faskes.FaskesAdapter
 import kotlinx.android.synthetic.main.list_item.view.*
 
 class ItemList : Fragment() {
@@ -24,16 +23,14 @@ class ItemList : Fragment() {
         val view = inflater.inflate(R.layout.list_item, container, false)
 
         // Recyclerview
-        val adapter = BookmarkAdapter(context?.let { BookmarkAdapter(it) })
+        val adapter = BookmarkAdapter()
         val recyclerView = view.recyclerview
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         // UserViewModel
-        mBookmarkViewModel = ViewModelProvider(this).get(BookmarkViewModel::class.java)
-        mBookmarkViewModel.readAllData.observe(viewLifecycleOwner, Observer { bookmark ->
-            adapter.setData(bookmark)
-        })
+        mBookmarkViewModel = ViewModelProvider(this)[BookmarkViewModel::class.java]
+        mBookmarkViewModel.readAllData.observe(viewLifecycleOwner, adapter::setData)
 
         return view
     }

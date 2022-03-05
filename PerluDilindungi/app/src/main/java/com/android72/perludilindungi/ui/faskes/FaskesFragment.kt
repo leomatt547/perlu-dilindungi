@@ -58,7 +58,7 @@ class FaskesFragment : Fragment() {
 
         val root: View = binding.root
         getProvince()
-        _binding.spinnerCity.visibility = INVISIBLE
+//        _binding.spinnerCity.visibility = INVISIBLE
         recyclerView = _binding.recyclerViewFaskes
         recyclerView.layoutManager = LinearLayoutManager(this@FaskesFragment.context)
 
@@ -104,7 +104,7 @@ class FaskesFragment : Fragment() {
                             //Toast.makeText(context, listProvince[position], Toast.LENGTH_SHORT).show()
                             if(listProvince[position] != null){
                                 provinceSelect = listProvince[position]
-                                _binding.spinnerCity.visibility = VISIBLE
+//                                _binding.spinnerCity.visibility = VISIBLE
                                 getCity(provinceSelect)
                             }
                         }

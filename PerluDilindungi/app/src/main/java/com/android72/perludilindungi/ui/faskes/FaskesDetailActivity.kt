@@ -80,21 +80,9 @@ class FaskesDetailActivity() : AppCompatActivity() {
             }
 
             _binding!!.btnBookmark.setOnClickListener {
-                /*if (bookmarkStatus == false) { */
+                if (bookmarkStatus == false) {
                     // Create Bookmark Object
                     val bookmark = Bookmark(
-                        100,
-                        "Kode",
-                        "nama",
-                        "alamat",
-                        "telp",
-                        "jenis",
-                        "status",
-                        "lat",
-                        "long"
-                    )
-
-                    /*val bookmark = Bookmark(
                         extras.getInt("id"),
                         extras.getString("faskesKodeStr"),
                         extras.getString("faskesNamaStr"),
@@ -104,12 +92,12 @@ class FaskesDetailActivity() : AppCompatActivity() {
                         extras.getString("status"),
                         extras.getString("latitude"),
                         extras.getString("longitude")
-                    ) */
+                    )
 
                     // Add Data to Database
                     mBookmarkViewModel.addBookmark(bookmark)
                     Toast.makeText(this, "Successfully added!", Toast.LENGTH_LONG).show()
-                /*}
+                }
                 else {
                     // del from Database
                     mBookmarkViewModel.deleteBookmark(extras.getInt("id"))
@@ -118,7 +106,7 @@ class FaskesDetailActivity() : AppCompatActivity() {
                     val fragment: Fragment = BookmarkFragment()
                     val fragmentManager: FragmentManager = supportFragmentManager
                     fragmentManager.beginTransaction().replace(com.android72.perludilindungi.R.id.container, fragment).commit()
-                } */
+                }
 
 
             }
