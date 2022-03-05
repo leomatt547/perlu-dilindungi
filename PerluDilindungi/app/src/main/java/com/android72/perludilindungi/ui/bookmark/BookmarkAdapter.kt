@@ -1,6 +1,7 @@
 package com.android72.perludilindungi.ui.bookmark
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -34,6 +35,13 @@ class BookmarkAdapter(): RecyclerView.Adapter<BookmarkAdapter.MyViewHolder>() {
         holder.itemView.faskesAlamat.text = currentItem.alamat
         holder.itemView.faskesTelp.text = currentItem.telp
         holder.itemView.faskesKode.text = currentItem.kode
+        if (currentItem.jenis_faskes == "PUSKESMAS") {
+            holder.itemView.faskesJenis.setBackgroundColor(Color.parseColor("#EF5DA8"))
+        } else if (currentItem.jenis_faskes == "RUMAH SAKIT") {
+            holder.itemView.faskesJenis.setBackgroundColor(Color.parseColor("#5D5FEF"))
+        } else if (currentItem.jenis_faskes == "KLINIK") {
+            holder.itemView.faskesJenis.setBackgroundColor(Color.parseColor("#7879F1"))
+        }
 
         // below buat click navigate to faskes detail
         holder.itemView.rowLayout.setOnClickListener {
