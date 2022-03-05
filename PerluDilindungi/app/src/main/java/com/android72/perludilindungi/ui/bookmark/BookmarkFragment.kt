@@ -39,7 +39,7 @@ class BookmarkFragment : Fragment() {
         _binding = FragmentBookmarkBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        mBookmarkViewModel = ViewModelProvider(this).get(BookmarkViewModel::class.java)
+        mBookmarkViewModel = ViewModelProvider(this)[BookmarkViewModel::class.java]
 
         /*root.add_btn.setOnClickListener {
             //below to check if data exist, masih eror tapi fungsinya :(

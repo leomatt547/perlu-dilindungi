@@ -62,25 +62,31 @@ class FaskesDetailActivity() : AppCompatActivity() {
                 _binding.imvFaskesStatus.setImageResource(com.android72.perludilindungi.R.drawable.ic_round_cancel_red_80)
                 _binding.lblFaskesStatus.text = "TIDAK SIAP VAKSINASI"
             }
-
             var bookmarkStatus = false
-            mBookmarkViewModel.readAllData.observe(this, Observer { bookmark ->
-                if (bookmark.any{ b -> b.id == extras.getInt("id") }) {
+            mBookmarkViewModel.readAllData.observe(this) { bookmark ->
+                if (bookmark.any { b -> b.id == extras.getInt("id") }) {
                     // id udh ada di list bookmark
-                    _binding.btnBookmark.setText("- Unbookmark")
+                    _binding.btnBookmark.text = "- Unbookmark"
                     bookmarkStatus = true
                 }
-            })
+            }
 
-            _binding!!.btnMaps.setOnClickListener { // Creates an Intent that will load a map of San Francisco
+            _binding.btnMaps.setOnClickListener { // Creates an Intent that will load a map of San Francisco
                 val gmmIntentUri = Uri.parse("geo:${extras.getString("latitude")},${extras.getString("longitude")}")
                 val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
                 mapIntent.setPackage("com.google.android.apps.maps")
                 startActivity(mapIntent)
             }
 
-            _binding!!.btnBookmark.setOnClickListener {
-                if (bookmarkStatus == false) {
+            _binding.btnBookmark.setOnClickListener {
+                mBookmarkViewModel.readAllData.observe(this) { bookmark ->
+                    if (bookmark.any { b -> b.id == extras.getInt("id") }) {
+                        // id udh ada di list bookmark
+                        _binding.btnBookmark.text = "- Unbookmark"
+                        bookmarkStatus = true
+                    }
+                }
+                if (!bookmarkStatus) {
                     // Create Bookmark Object
                     val bookmark = Bookmark(
                         extras.getInt("id"),
@@ -101,14 +107,14 @@ class FaskesDetailActivity() : AppCompatActivity() {
                 else {
                     // del from Database
                     mBookmarkViewModel.deleteBookmark(extras.getInt("id"))
+                    Toast.makeText(this, "Successfully delete!", Toast.LENGTH_LONG).show()
+                    _binding.btnBookmark.text = "+ Bookmark"
 
                     // nav to recycler view
-                    val fragment: Fragment = BookmarkFragment()
-                    val fragmentManager: FragmentManager = supportFragmentManager
-                    fragmentManager.beginTransaction().replace(com.android72.perludilindungi.R.id.container, fragment).commit()
+//                    val fragment: Fragment = BookmarkFragment()
+//                    val fragmentManager: FragmentManager = supportFragmentManager
+//                    fragmentManager.beginTransaction().replace(com.android72.perludilindungi.R.id.container, fragment).commit()
                 }
-
-
             }
         }
     }

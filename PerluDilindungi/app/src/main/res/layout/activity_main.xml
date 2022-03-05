@@ -45,7 +45,7 @@
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:icon="@drawable/ic_home_black_24dp"
+            android:icon="@drawable/ic_baseline_library_books_24"
             android:text="@string/title_berita" />
 
         <com.google.android.material.tabs.TabItem
