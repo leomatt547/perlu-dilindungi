@@ -38,7 +38,7 @@
         android:layout_marginBottom="-5dp"
         android:background="@color/tabBackgroundColor"
         app:tabGravity="fill"
-        app:tabIndicatorColor="?colorPrimary"
+        app:tabIndicatorColor="?colorOnPrimary"
         app:tabMaxWidth="0dp"
         app:tabMode="fixed">
 
@@ -51,13 +51,13 @@
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:icon="@drawable/ic_launcher_background"
+            android:icon="@drawable/ic_baseline_location_on_24"
             android:text="@string/title_faskes" />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:icon="@drawable/ic_launcher_foreground"
+            android:icon="@drawable/ic_baseline_bookmark_24"
             android:text="@string/title_bookmark" />
 
     </com.google.android.material.tabs.TabLayout>
