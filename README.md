@@ -9,7 +9,7 @@ Aplikasi Perlu dilindungi merupakan aplikasi yang berisi terkini pandemi COVID-1
 ### Fitur Check-in
 Apabila pengguna menekan floating button pada semua layar aplikasi, pengguna akan diminta untuk menyalakan GPS dan internet. Setelah itu, program akan menscan QR-CODE pada layar tangkapan kamera dan mengenerate suhu. Setelah itu, akan dicek apakah status check-in berwarna hijau, kuning, merah, atau hitam.
 ### Fitur Berita
-Isi di sini <Rafidika>
+Saat membuka aplikasi, halaman pertama yang muncul adalah halaman berita. Halaman ini berisi berita-berita terkini mengenai Covid-19. User dapat scroll ke atas atau bawah untuk melihat berita lainnya serta dapat mengklik salah satu berita untuk melihat artikel lengkap dari berita tersebut
 ### Fitur Faskes
 Isi di sini <Fauzan>
 ### Fitur Bookmark
@@ -24,13 +24,14 @@ Isi di sini <Afifah>
 ### Fitur Check-in
 Isi di sini <Leonard>
 ### Fitur Berita
-Isi di sini <Rafidika>
+![Halaman Berita](./assets/md-berita.png)
+![Halaman Web Berita](./assets/md-beritaWeb.png)
 ### Fitur Faskes
 Isi di sini <Fauzan>
 ### Fitur Bookmark
 Isi di sini <Afifah>
 ## Pembagian kerja anggota kelompok.
 1. 13519215 - Leonard Matheus : Membuat Fitur Check-in (QR-Code dan Suhu)
-2. ***
+2. 13519207 - Rafidika Samekto : Membuat Fitur Berita
 3. ***
 4. ***
