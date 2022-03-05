@@ -1,6 +1,7 @@
 package com.android72.perludilindungi.ui.faskes
 
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -17,11 +18,20 @@ class FaskesDetailActivity() : AppCompatActivity() {
         val extras = intent.extras
 
         if (extras != null) {
-            _binding.lblFaskesKode.text = extras.getString("faskesKodeStr")
+            _binding.lblFaskesKode.text = "Kode: " + extras.getString("faskesKodeStr")
             _binding.lblFaskesNama.text = extras.getString("faskesNamaStr")
             _binding.lblFaskesAlamat.text = extras.getString("faskesAlamatStr")
             _binding.lblFaskesTelp.text = extras.getString("faskesTelpStr")
             _binding.lblFaskesJenis.text = extras.getString("faskesJenisStr")
+
+            if (extras.getString("faskesJenisStr") == "PUSKESMAS") {
+                _binding.lblFaskesJenis.setBackgroundColor(Color.parseColor("#EF5DA8"))
+            } else if (extras.getString("faskesJenisStr") == "RUMAH SAKIT") {
+                _binding.lblFaskesJenis.setBackgroundColor(Color.parseColor("#5D5FEF"))
+            } else if (extras.getString("faskesJenisStr") == "KLINIK") {
+                _binding.lblFaskesJenis.setBackgroundColor(Color.parseColor("#7879F1"))
+            }
+
             if (extras.getString("status") == "Siap Vaksinasi") {
                 _binding.imvFaskesStatus.setImageResource(R.drawable.ic_round_check_circle_80)
                 _binding.lblFaskesStatus.text = "SIAP VAKSINASI"

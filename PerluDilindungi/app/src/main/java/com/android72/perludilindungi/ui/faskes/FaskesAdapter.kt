@@ -2,6 +2,7 @@ package com.android72.perludilindungi.ui.faskes
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -41,7 +42,17 @@ class FaskesAdapter(context: Context, private var listFaskes: ArrayList<Faskes>)
         }
 
         fun faskesKodeBind(txt: String) {
-            faskesKode.setText(txt)
+            faskesKode.setText("Kode: " + txt)
+        }
+
+        fun faskesJenisBackgroundBind(txt: String) {
+            if (txt == "PUSKESMAS") {
+                faskesJenis.setBackgroundColor(Color.parseColor("#EF5DA8"))
+            } else if (txt == "RUMAH SAKIT") {
+                faskesJenis.setBackgroundColor(Color.parseColor("#5D5FEF"))
+            } else if (txt == "KLINIK") {
+                faskesJenis.setBackgroundColor(Color.parseColor("#7879F1"))
+            }
         }
     }
 
@@ -61,6 +72,7 @@ class FaskesAdapter(context: Context, private var listFaskes: ArrayList<Faskes>)
         holder.faskesAlamatBind(faskesAlamatStr)
         holder.faskesTelpBind(faskesTelpStr)
         holder.faskesKodeBind(faskesKodeStr)
+        holder.faskesJenisBackgroundBind(faskesJenisStr)
         holder.faskesLayout.setOnClickListener {
             //FaskesDetail(listFaskes.get(position))
 //            holder.itemView.findNavController().navigate(R.id.action_listItem_to_fragmentDetail)

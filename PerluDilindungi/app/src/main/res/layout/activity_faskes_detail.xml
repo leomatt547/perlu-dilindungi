@@ -33,7 +33,7 @@
             android:id="@+id/lbl_faskes_kode"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:text="Kode: 10040305"
             android:textColor="@color/black"
             android:textSize="16sp"
@@ -44,7 +44,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="#EF5DA8"
             android:text="Puskesmas"
+            android:textColor="@color/white"
             android:textAlignment="center"
             android:textSize="16sp"
             android:textStyle="bold" />
