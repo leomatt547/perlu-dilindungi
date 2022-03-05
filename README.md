@@ -25,6 +25,7 @@ Pada halaman detail informasi faskes dan menekan sebuah tombol yang akan berubah
 ## Screenshot aplikasi (dimasukkan dalam folder screenshot).
 ### Fitur Check-in
 ![](./assets/md-checkin-black.jpg)
+<img src="./assets/md-checkin-black.jpg"  width=auto height="120">
 ![](./assets/md-checkin-green.jpg)
 ![](./assets/md-checkin-red.jpg)
 ![](./assets/md-checkin-yellow.jpg)
